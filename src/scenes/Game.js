@@ -6,6 +6,7 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    this.add.circle(400, 250, 10, 0xefefef, 1)
+    const ball = this.add.circle(400, 250, 10, 0xefefef, 1)
+    this.physics.add.existing(ball)
   }
 }

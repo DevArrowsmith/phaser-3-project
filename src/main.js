@@ -7,8 +7,15 @@ import Game from './scenes/Game'
 const config = {
   width: 800,
   height: 500,
-  type: Phaser.AUTO
+  type: Phaser.AUTO,
   //AUTO: If the browser supports WebGL that will be used, otherwise it will fallback to Canvas.
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 200 },
+      debug: true
+    }
+  }
 }
 
 const game = new Phaser.Game(config)
