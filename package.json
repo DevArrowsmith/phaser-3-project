@@ -4,7 +4,7 @@
   "description": "This repo contains my first Phaser 3 project.",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "parcel src/index.html -p 7777",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
