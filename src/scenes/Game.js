@@ -6,7 +6,6 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    const text = this.add.text(400, 250, 'Game Scene')
-    text.setOrigin(0.5, 0.5)
+    this.add.circle(400, 250, 10, 0xefefef, 1)
   }
 }
