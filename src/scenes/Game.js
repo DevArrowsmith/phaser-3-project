@@ -32,6 +32,18 @@ export default class Game extends Phaser.Scene {
 
     //Create controls
     this.cursors = this.input.keyboard.createCursorKeys()
+
+    //Create score display
+    this.leftScore = 0
+    this.rightScore = 0
+
+    this.leftScoreDisplay = this.add.text(200, 50, this.leftScore, {
+      fontSize: 48
+    }).setOrigin(0.5, 0.5)
+    
+    this.rightScoreDisplay = this.add.text(600, 50, this.rightScore, {
+      fontSize: 48
+    }).setOrigin(0.5, 0.5)
   }
 
   update() {
@@ -58,9 +70,17 @@ export default class Game extends Phaser.Scene {
       paddleRightBody.updateFromGameObject()
     }
 
-    if (this.ball.x < -30 || this.ball. x > 830) {
+    if (this.ball.x > 830) {
+      this.leftScore += 1
+      this.leftScoreDisplay.text = this.leftScore
       this.resetBall();
     }
+
+    if (this.ball.x < -30) {
+    this.rightScore += 1
+    this.rightScoreDisplay.text = this.rightScore
+    this.resetBall();
+  }
   }
 
   resetBall() {
