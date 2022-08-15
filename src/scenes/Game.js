@@ -11,7 +11,7 @@ export default class Game extends Phaser.Scene {
 
     // Create Ball Physics & Initial Velocity
     this.physics.add.existing(ball)
-    ball.body.setVelocity(-200, 5)
+    ball.body.setVelocity(Math.random() > 0.5 ? -200 : 200, Math.random() > 0.5 ? Phaser.Math.Between(-200, -50) : Phaser.Math.Between (50, 200))
 
     // Create Ball Collisions
     ball.body.setCollideWorldBounds(true, 1, 1)
