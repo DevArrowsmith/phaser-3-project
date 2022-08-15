@@ -33,20 +33,27 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
+    const paddleLeftBody = this.paddleLeft.body
+    const paddleRightBody = this.paddleRight.body
+
     // paddleLeft controls
     if (this.cursors.up.isDown) {
       this.paddleLeft.y -=10
+      paddleLeftBody.updateFromGameObject()
     }
     if (this.cursors.down.isDown) {
       this.paddleLeft.y += 10
+      paddleLeftBody.updateFromGameObject()
     }
 
     // paddleRight controls
     if (this.cursors.space.isDown) {
       this.paddleRight.y -=10
+      paddleRightBody.updateFromGameObject()
     }
     if (this.cursors.shift.isDown) {
       this.paddleRight.y += 10
+      paddleRightBody.updateFromGameObject()
     }
   }
 }
