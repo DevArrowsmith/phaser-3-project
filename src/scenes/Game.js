@@ -18,16 +18,35 @@ export default class Game extends Phaser.Scene {
     ball.body.setBounce(1, 1)
 
     // Create Paddles
-    const paddleLeft = this.add.rectangle(40, 250, 16, 100, 0xefefef, 1)
-    const paddleRight = this.add.rectangle(760, 250, 16, 100, 0xefefef, 1)
+    this.paddleLeft = this.add.rectangle(40, 250, 16, 100, 0xefefef, 1)
+    this.paddleRight = this.add.rectangle(760, 250, 16, 100, 0xefefef, 1)
 
     // Create paddles' physics.
     // 'true' in 'paddle.physics.add.existing' is for 'isStatic'. Entity can be moved by the player, but not by the physics engine.
-    this.physics.add.existing(paddleLeft, true)
-    this.physics.add.existing(paddleRight, true)    
-    this.physics.add.collider(paddleLeft, ball)
-    this.physics.add.collider(paddleRight, ball)
+    this.physics.add.existing(this.paddleLeft, true)
+    this.physics.add.existing(this.paddleRight, true)    
+    this.physics.add.collider(this.paddleLeft, ball)
+    this.physics.add.collider(this.paddleRight, ball)
 
+    //Create controls
+    this.cursors = this.input.keyboard.createCursorKeys()
+  }
 
+  update() {
+    // paddleLeft controls
+    if (this.cursors.up.isDown) {
+      this.paddleLeft.y -=10
+    }
+    if (this.cursors.down.isDown) {
+      this.paddleLeft.y += 10
+    }
+
+    // paddleRight controls
+    if (this.cursors.space.isDown) {
+      this.paddleRight.y -=10
+    }
+    if (this.cursors.shift.isDown) {
+      this.paddleRight.y += 10
+    }
   }
 }
