@@ -6,16 +6,18 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.physics.world.setBounds(-100, 0, 1000, 500)
+
     // Create Ball
-    const ball = this.add.circle(400, 250, 10, 0xefefef, 1)
+    this.ball = this.add.circle(400, 250, 10, 0xefefef, 1)
 
-    // Create Ball Physics & Initial Velocity
-    this.physics.add.existing(ball)
-    ball.body.setVelocity(Math.random() > 0.5 ? -200 : 200, Math.random() > 0.5 ? Phaser.Math.Between(-200, -50) : Phaser.Math.Between (50, 200))
+    // Create Ball Physics
+    this.physics.add.existing(this.ball)
+    this.ball.body.setCollideWorldBounds(true, 1, 1)
+    this.ball.body.setBounce(1, 1)
 
-    // Create Ball Collisions
-    ball.body.setCollideWorldBounds(true, 1, 1)
-    ball.body.setBounce(1, 1)
+    // Initialise Ball Position & Velocity
+    this.resetBall()
 
     // Create Paddles
     this.paddleLeft = this.add.rectangle(40, 250, 16, 100, 0xefefef, 1)
@@ -25,8 +27,8 @@ export default class Game extends Phaser.Scene {
     // 'true' in 'paddle.physics.add.existing' is for 'isStatic'. Entity can be moved by the player, but not by the physics engine.
     this.physics.add.existing(this.paddleLeft, true)
     this.physics.add.existing(this.paddleRight, true)    
-    this.physics.add.collider(this.paddleLeft, ball)
-    this.physics.add.collider(this.paddleRight, ball)
+    this.physics.add.collider(this.paddleLeft, this.ball)
+    this.physics.add.collider(this.paddleRight, this.ball)
 
     //Create controls
     this.cursors = this.input.keyboard.createCursorKeys()
@@ -55,5 +57,19 @@ export default class Game extends Phaser.Scene {
       this.paddleRight.y += 10
       paddleRightBody.updateFromGameObject()
     }
+
+    if (this.ball.x < -30 || this.ball. x > 830) {
+      this.resetBall();
+    }
+  }
+
+  resetBall() {
+    this.ball.setPosition(400, 250)
+
+    this.ball.body.setVelocity(Math.random() > 0.5 ? -200 : 200, Math.random() > 0.5 ? Phaser.Math.Between(-200, -50) : Phaser.Math.Between (50, 200))
+
+    // const angle = Phaser.Math.Between(0, 360)
+    // const vector = this.physics.velocityFromAngle(angle, 200)
+    // ball.body.setVelocity(vector.x, vector.y)
   }
 }
