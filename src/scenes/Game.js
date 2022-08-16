@@ -70,6 +70,7 @@ export default class Game extends Phaser.Scene {
       paddleRightBody.updateFromGameObject()
     }
 
+    // Detect scoring, update score, reset ball
     if (this.ball.x > 830) {
       this.leftScore += 1
       this.leftScoreDisplay.text = this.leftScore
@@ -83,9 +84,9 @@ export default class Game extends Phaser.Scene {
   }
   }
 
+  // Methods
   resetBall() {
     this.ball.setPosition(400, 250)
-
     this.ball.body.setVelocity(Math.random() > 0.5 ? -200 : 200, Math.random() > 0.5 ? Phaser.Math.Between(-200, -50) : Phaser.Math.Between (50, 200))
 
     // const angle = Phaser.Math.Between(0, 360)
